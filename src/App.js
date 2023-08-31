@@ -12,12 +12,27 @@ function App() {
     setSelectedArticle(article);
     setShowPage(true);
   };
+  
+  const handleBackClick = () => {
+    setSelectedArticle(null);
+    setShowPage(false);
+  };
+
   return (
-    <div className="App bg-slate-200 p-5 ">
-      <h1 className='font-bold text-3xl text-center mb-3'>Artikel Terbaru Hari Ini</h1>
-      <div className="flex justify-center align-middle flex-wrap">
-      {showPage ? <Page article={selectedArticle}/> : <Article onClick={handleArticleClick} />}
-      </div>
+    <div className="App bg-slate-200 p-5">
+      {!showPage && (
+        <div className="">
+          <h1 className='font-bold text-3xl text-center mb-3'>Artikel menarik untuk anda baca</h1>
+          <div className="flex justify-center flex-wrap">
+          <Article onClick={handleArticleClick} />
+          </div>
+        </div>
+      )}
+      {showPage && (
+        <div className="flex justify-center ">
+        <Page article={selectedArticle} onBackClick={handleBackClick} />
+        </div>
+      )}
     </div>
   );
 }

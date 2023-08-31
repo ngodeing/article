@@ -5,3 +5,6 @@
 body{
     background-color: rgb(226 232 240);
 }
+.paragraphs{
+  white-space: pre-line;
+}

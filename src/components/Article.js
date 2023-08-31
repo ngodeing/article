@@ -19,7 +19,7 @@ function Article({ onClick }) {
     cursor-pointer" onClick={() => onClick(user)}>
       <img className="rounded mb-3" src={user.img} alt="Sunset di pegunungan" />
       <h3 className='font-bold text-2xl mb-3'>{ user.title }</h3>
-      <p>{user.paragraph}</p>
+      <p>{user.paragraph.substring(0, 100)}...</p>
     </div>
   )));
 }
