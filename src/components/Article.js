@@ -6,7 +6,15 @@ function Article({ onClick }) {
   const [value,setValue] = useState([])
 
   const getValue = async () => {
-    const response = await axios.get("http://localhost:5000/users");
+    const headers = {
+      'User-Agent': 'YourCustomUserAgent', // Set your custom User-Agent here
+      'ngrok-skip-browser-warning': 'true', // Set your custom value for ngrok-skip-browser-warning
+    };
+    
+    // Define the URL you want to send the request to
+    const url = 'https://da84-103-162-237-227.ngrok-free.app/users'; // Replace with your API endpoint
+
+    const response = await axios.get(url, {headers});
     setValue(response.data)
   };
   useEffect(() => {
