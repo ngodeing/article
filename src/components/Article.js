@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Article({ onClick }) {
   const [value,setValue] = useState([])
+  const [error, setError] = useState(null);
 
   const getValue = async () => {
     const headers = {
@@ -14,12 +15,24 @@ function Article({ onClick }) {
     // Define the URL you want to send the request to
     const url = 'https://da84-103-162-237-227.ngrok-free.app/users'; // Replace with your API endpoint
 
+    try {
+      const response = await axios.get(url, { headers });
+      setValue(response.data);
+    } catch (error) {
+      setError('Server is currently unavailable. Please try again later.');
+    }
+
     const response = await axios.get(url, {headers});
     setValue(response.data)
   };
   useEffect(() => {
       getValue();
   }, []);
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+  
   return (
     value.map((user,index)=>(
     <div key={index} className="Article w-96 bg-slate-50 p-6 rounded-lg flex-col m-5 shadow-xl transition transform hover:-translate-y-2
